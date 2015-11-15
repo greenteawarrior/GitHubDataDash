@@ -1,0 +1,77 @@
+[
+  {
+    "sha": "7bb194fd527242c7b50c4d6ee30102b9c1376883",
+    "commit": {
+      "author": {
+        "name": "Ryan Louie",
+        "email": "ryan.louie@students.olin.edu",
+        "date": "2015-10-27T15:15:43Z"
+      },
+      "committer": {
+        "name": "Ryan Louie",
+        "email": "ryan.louie@students.olin.edu",
+        "date": "2015-10-27T15:15:43Z"
+      },
+      "message": "Merge pull request #11 from DakotaNelson/writeup\n\nWriteup as README.md",
+      "tree": {
+        "sha": "214df5910df099244a4b274a17b667e744f3938e",
+        "url": "https://api.github.com/repos/DakotaNelson/robot-street-signs/git/trees/214df5910df099244a4b274a17b667e744f3938e"
+      },
+      "url": "https://api.github.com/repos/DakotaNelson/robot-street-signs/git/commits/7bb194fd527242c7b50c4d6ee30102b9c1376883",
+      "comment_count": 0
+    },
+    "url": "https://api.github.com/repos/DakotaNelson/robot-street-signs/commits/7bb194fd527242c7b50c4d6ee30102b9c1376883",
+    "html_url": "https://github.com/DakotaNelson/robot-street-signs/commit/7bb194fd527242c7b50c4d6ee30102b9c1376883",
+    "comments_url": "https://api.github.com/repos/DakotaNelson/robot-street-signs/commits/7bb194fd527242c7b50c4d6ee30102b9c1376883/comments",
+    "author": {
+      "login": "youralien",
+      "id": 5459644,
+      "avatar_url": "https://avatars.githubusercontent.com/u/5459644?v=3",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/youralien",
+      "html_url": "https://github.com/youralien",
+      "followers_url": "https://api.github.com/users/youralien/followers",
+      "following_url": "https://api.github.com/users/youralien/following{/other_user}",
+      "gists_url": "https://api.github.com/users/youralien/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/youralien/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/youralien/subscriptions",
+      "organizations_url": "https://api.github.com/users/youralien/orgs",
+      "repos_url": "https://api.github.com/users/youralien/repos",
+      "events_url": "https://api.github.com/users/youralien/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/youralien/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "youralien",
+      "id": 5459644,
+      "avatar_url": "https://avatars.githubusercontent.com/u/5459644?v=3",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/youralien",
+      "html_url": "https://github.com/youralien",
+      "followers_url": "https://api.github.com/users/youralien/followers",
+      "following_url": "https://api.github.com/users/youralien/following{/other_user}",
+      "gists_url": "https://api.github.com/users/youralien/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/youralien/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/youralien/subscriptions",
+      "organizations_url": "https://api.github.com/users/youralien/orgs",
+      "repos_url": "https://api.github.com/users/youralien/repos",
+      "events_url": "https://api.github.com/users/youralien/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/youralien/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "7cfeee36146922bd021cd3a5c1c06f0bfd6d40cc",
+        "url": "https://api.github.com/repos/DakotaNelson/robot-street-signs/commits/7cfeee36146922bd021cd3a5c1c06f0bfd6d40cc",
+        "html_url": "https://github.com/DakotaNelson/robot-street-signs/commit/7cfeee36146922bd021cd3a5c1c06f0bfd6d40cc"
+      },
+      {
+        "sha": "a1faec7f29e0b18b6766df58531bc47628618c7e",
+        "url": "https://api.github.com/repos/DakotaNelson/robot-street-signs/commits/a1faec7f29e0b18b6766df58531bc47628618c7e",
+        "html_url": "https://github.com/DakotaNelson/robot-street-signs/commit/a1faec7f29e0b18b6766df58531bc47628618c7e"
+      }
+    ]
+  }
+]
