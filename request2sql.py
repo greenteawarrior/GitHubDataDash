@@ -5,7 +5,7 @@ import json
 import os
 
 # Whether to make API calls, or read JSON from backup.  Good for solving Rate Limiting
-ONLINE = False
+ONLINE = True
 DUMP = False
 
 def extract_features_from_comment(comment):
@@ -62,46 +62,50 @@ def request_pr_list(repo_owner, repo_name):
     pr_list = requests.get(pr_list_api_url).json()
     return pr_list
 
-# instantiate db and table
-db_name = "pr_comments_db.sqlite"
-dbw = DBWrapper(db_name)
-if not os.path.exists(db_name):
-    print("Creating DB: {}".format(db_name))
-    dbw.create_comments_table()
-
-if ONLINE:
-    pr_list = request_pr_list()
-    if DUMP:
-        with open('pr_list.json', 'w') as fp:
-            json.dump(pr_list, fp)
-else:
-    with open('pr_list.json', 'r') as fp:
-        pr_list = json.load(fp)
-
-for i, pr in enumerate(pr_list):
-    pr_schema = extract_features_from_pr(pr)
+def request_all_comments(repo_owner, repo_name):
+    # instantiate db and table
+    db_name = "pr_comments_db.sqlite"
+    dbw = DBWrapper(db_name)
+    if not os.path.exists(db_name):
+        print("Creating DB: {}".format(db_name))
+        dbw.create_comments_table()
 
     if ONLINE:
-        review_comments = requests.get(pr["_links"]["review_comments"]["href"]).json()
-        issue_comments = requests.get(pr["_links"]["issue"]["href"] + "/comments").json()
+        pr_list = request_pr_list(repo_owner, repo_name)
         if DUMP:
-            with open('review_comments%d.json' % i, 'w') as fp:
-                json.dump(review_comments, fp)
-            with open('issue_comments%d.json' % i, 'w') as fp:
-                json.dump(issue_comments, fp)
+            with open('pr_list.json', 'w') as fp:
+                json.dump(pr_list, fp)
     else:
-        with open('review_comments%d.json' % i, 'r') as fp:
-            review_comments = json.load(fp)
-        with open('issue_comments%d.json' % i, 'r') as fp:
-            issue_comments = json.load(fp)
+        with open('pr_list.json', 'r') as fp:
+            pr_list = json.load(fp)
+
+    for i, pr in enumerate(pr_list):
+        pr_schema = extract_features_from_pr(pr)
+
+        if ONLINE:
+            review_comments = requests.get(pr["_links"]["review_comments"]["href"]).json()
+            issue_comments = requests.get(pr["_links"]["issue"]["href"] + "/comments").json()
+            if DUMP:
+                with open('review_comments%d.json' % i, 'w') as fp:
+                    json.dump(review_comments, fp)
+                with open('issue_comments%d.json' % i, 'w') as fp:
+                    json.dump(issue_comments, fp)
+        else:
+            with open('review_comments%d.json' % i, 'r') as fp:
+                review_comments = json.load(fp)
+            with open('issue_comments%d.json' % i, 'r') as fp:
+                issue_comments = json.load(fp)
 
 
-    for comment in review_comments:
-        comment_schema = extract_features_from_comment(comment)
-        comment_schema.update(pr_schema)
-        dbw.upsert_comment(**comment_schema)
+        for comment in review_comments:
+            comment_schema = extract_features_from_comment(comment)
+            comment_schema.update(pr_schema)
+            dbw.upsert_comment(**comment_schema)
 
-    for comment in issue_comments:
-        comment_schema = extract_features_from_comment(comment)
-        comment_schema.update(pr_schema)
-        dbw.upsert_comment(**comment_schema)
+        for comment in issue_comments:
+            comment_schema = extract_features_from_comment(comment)
+            comment_schema.update(pr_schema)
+            dbw.upsert_comment(**comment_schema)
+
+if __name__ == '__main__':
+    request_all_comments("mila-udem", "fuel")
