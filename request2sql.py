@@ -99,17 +99,9 @@ for i, pr in enumerate(pr_list):
     for comment in review_comments:
         comment_schema = extract_features_from_comment(comment)
         comment_schema.update(pr_schema)
-        try:
-            dbw.upsert_comment(**comment_schema)
-        except Exception, e:
-            print e
-            import ipdb; ipdb.set_trace();
+        dbw.upsert_comment(**comment_schema)
 
     for comment in issue_comments:
         comment_schema = extract_features_from_comment(comment)
         comment_schema.update(pr_schema)
-        try:
-            dbw.upsert_comment(**comment_schema)
-        except Exception, e:
-            print e
-            import ipdb; ipdb.set_trace();
+        dbw.upsert_comment(**comment_schema)
