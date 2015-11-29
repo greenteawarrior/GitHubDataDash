@@ -1,7 +1,6 @@
 from __future__ import unicode_literals
 from crud import DBWrapper
 import requests
-import utils
 import json
 import os
 
@@ -100,7 +99,6 @@ for i, pr in enumerate(pr_list):
     for comment in review_comments:
         comment_schema = extract_features_from_comment(comment)
         comment_schema.update(pr_schema)
-        comment_schema = {key: utils.format_quotes(value) for (key, value) in comment_schema.iteritems()}
         try:
             dbw.upsert_comment(**comment_schema)
         except Exception, e:
@@ -110,7 +108,6 @@ for i, pr in enumerate(pr_list):
     for comment in issue_comments:
         comment_schema = extract_features_from_comment(comment)
         comment_schema.update(pr_schema)
-        comment_schema = {key: utils.format_quotes(value) for (key, value) in comment_schema.iteritems()}
         try:
             dbw.upsert_comment(**comment_schema)
         except Exception, e:
