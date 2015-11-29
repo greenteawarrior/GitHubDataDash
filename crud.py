@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 import sqlite3
 
 class DBWrapper(object):
@@ -24,24 +25,24 @@ class DBWrapper(object):
 
 	def upsert_comment(self, link, person, time, body, repo_owner, repo_name, pr_number, pr_updated_at):
 		c = self.conn.cursor()
-		c.execute(
-			"""INSERT OR IGNORE INTO comments
+		insert_query = """INSERT OR IGNORE INTO comments
 			(link, person, time, body, repo_owner, repo_name, pr_number, pr_updated_at)
 			VALUES
-			('{link}','{person}','{time}','{body}','{repo_owner}','{repo_name}',{pr_number},'{pr_updated_at}');
+			("{link}","{person}","{time}","{body}","{repo_owner}","{repo_name}",{pr_number},"{pr_updated_at}")
 			""".format(link=link, person=person, time=time, body=body, repo_owner=repo_owner, repo_name=repo_name, pr_number=pr_number, pr_updated_at=pr_updated_at)
-		)
-		c.execute(
-			"""UPDATE comments SET
-			link='{link}',
-			person='{person}',
-			time='{time}',
-			body='{body}',
-			repo_owner='{repo_owner}',
-			repo_name='{repo_name}',
+		print insert_query
+		c.execute(insert_query)
+		update_query = """UPDATE comments SET
+			link="{link}",
+			person="{person}",
+			time="{time}",
+			body="{body}",
+			repo_owner="{repo_owner}",
+			repo_name="{repo_name}",
 			pr_number={pr_number},
-			pr_updated_at='{pr_updated_at}'
-			WHERE link='{link}';
+			pr_updated_at="{pr_updated_at}"
+			WHERE link="{link}";
 			""".format(link=link, person=person, time=time, body=body, repo_owner=repo_owner, repo_name=repo_name, pr_number=pr_number, pr_updated_at=pr_updated_at)
-		)
+		print update_query
+		c.execute(update_query)
 		self.conn.commit()
