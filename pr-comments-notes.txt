@@ -1,0 +1,52 @@
+
+questions:
+what is new?  What disappears with time?
+
+get pr-list
+for pr in pr-list:
+	get the pull request info
+	get the issue comments
+	get the review comments
+
+
+keys we care about
+-----
+repo name
+time of comment
+who made the comment (to link back to NINJA)
+how many PR's open and not resolved
+how many new comments in the given interval
+links to the comments
+comment body
+	can give us tags for ranking the importance of the comment
+
+# repo name
+review_comment["url"].split('/')[indexes]
+pull_request["url"].split('/')
+issue_comment["url"].split('/')
+
+# time of comment
+review_comment["updated_at"]
+issue_comment["updated_at"]
+pull_request["updated_at"]
+
+# who made the comment
+issue_comment["user"]["login"]
+review_comment["user"]["login"]
+pull_request["user"]["login"]
+
+# how many
+len(pr-list)
+
+# how many new comments in the given interval
+its a sql query that selects the comments where updated_at is (24 hours?) recent
+
+# links to the comments
+review_comment["html_url"]
+issue_comment["html_url"]
+pull_request["html_url"]
+
+# comment body in case we want to parse for useful tags, shenanigans
+review_comment["body"]
+issue_comment["body"]
+pull_request["body"]
