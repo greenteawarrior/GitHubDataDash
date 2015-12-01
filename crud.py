@@ -9,7 +9,7 @@ class DBWrapper(object):
     def create_comments_table(self):
         c = self.conn.cursor()
         c.execute(
-            """CREATE TABLE comments 
+            """CREATE TABLE comments
             (
             link TEXT PRIMARY KEY,
             person TEXT,
@@ -40,4 +40,28 @@ class DBWrapper(object):
             pr_updated_at=?
             WHERE link=? """,
             (link, person, time, body, repo_owner, repo_name, pr_number, pr_updated_at, link))
+        self.conn.commit()
+
+    # TODO: Should test the ninja functions before pushing to GitHub
+
+    def create_ninjas_table(self):
+        c = self.conn.cursor()
+        c.execute(
+            """CREATE TABLE ninjas
+            (
+            github_handle TEXT,
+            first TEXT,
+            last TEXT,
+            course TEXT,
+            semester TEXT
+            )"""
+        )
+        self.conn.commit()
+
+    def insert_ninja(self, github_handle, first, last, course, semester):
+        c = self.conn.cursor()
+        c.execute("""INSERT OR IGNORE INTO comments
+            (github_handle, first, last, course, semester)
+            VALUES (?, ?, ?, ?, ?)""",
+            (github_handle, first, last, course, semester))
         self.conn.commit()

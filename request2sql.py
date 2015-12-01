@@ -42,7 +42,7 @@ def extract_features_from_pr(pr):
         "repo_owner": repo_owner,
         "repo_name": repo_name,
         "pr_number": pr["number"],
-        "pr_updated_at": pr["updated_at"] 
+        "pr_updated_at": pr["updated_at"]
     }
 
 def request_pr_list(repo_owner, repo_name):
