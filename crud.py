@@ -42,6 +42,12 @@ class DBWrapper(object):
             (link, person, time, body, repo_owner, repo_name, pr_number, pr_updated_at, link))
         self.conn.commit()
 
+    def get_comments_for_repo(self, repo_owner, repo_name):
+        c = self.conn.cursor()
+        return c.execute("""SELECT * FROM comments
+            WHERE repo_owner=? AND repo_name=?""",
+            (repo_owner, repo_name))
+
     # TODO: Should test the ninja functions before pushing to GitHub
 
     def create_ninjas_table(self):
@@ -65,3 +71,4 @@ class DBWrapper(object):
             VALUES (?, ?, ?, ?, ?)""",
             (github_handle, first, last, course, semester))
         self.conn.commit()
+
