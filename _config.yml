@@ -1,11 +1,13 @@
 # Site settings
-title: GitHubDataDash 
-tagline: A Data Dashboard Fall 2015 Final Project using Github Data 
+title: GitHubDataDash
+tagline: A Data Dashboard Fall 2015 Final Project using Github Data
 email: emily.wang@students.olin.edu
-description: A Data Dashboard for Teachers to track the progress of feedback made through comments on pull requests. For Olin College's Data Dashboard Seminar, taught by Matthew Ritter, Fall 2015. 
+email1: ryan.louie@students.olin.edu
+description: A Data Dashboard for Teachers to track the progress of feedback made through comments on pull requests. For Olin College's Data Dashboard Seminar, taught by Matthew Ritter, Fall 2015.
 baseurl: "/GitHubDataDash" # the subpath of your site, e.g. /blog/
 url: "http://greenteawarrior.github.io/GitHubDataDash/" # the base hostname & protocol for your site
-github_username: greenteawarrior 
+github_username: greenteawarrior
+github_username1: youralien
 highlighter: pygments
 github: [Repository metadata]
 
