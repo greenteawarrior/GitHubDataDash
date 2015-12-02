@@ -1,14 +1,13 @@
 # Site settings
-title: Your awesome title
-email: your-email@domain.com
-description: > # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
-baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://yourdomain.com" # the base hostname & protocol for your site
-twitter_username: jekyllrb
-github_username:  jekyll
+title: GitHubDataDash 
+tagline: A Data Dashboard Fall 2015 Final Project using Github Data 
+email: emily.wang@students.olin.edu
+description: A Data Dashboard for Teachers to track the progress of feedback made through comments on pull requests. For Olin College's Data Dashboard Seminar, taught by Matthew Ritter, Fall 2015. 
+baseurl: "/GitHubDataDash" # the subpath of your site, e.g. /blog/
+url: "http://greenteawarrior.github.io/GitHubDataDash/" # the base hostname & protocol for your site
+github_username: greenteawarrior 
+highlighter: pygments
+github: [Repository metadata]
 
 # Build settings
 markdown: kramdown
