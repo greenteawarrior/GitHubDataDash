@@ -4,6 +4,8 @@ import requests
 import json
 import os
 
+from config import OAUTH_TOKEN
+
 # Whether to make API calls, or read JSON from backup.  Good for solving Rate Limiting
 ONLINE = False
 DUMP = False
@@ -57,19 +59,21 @@ def request_pr_list(repo_owner, repo_name):
     -------
     pr_list: list of json objects
     """
-    pr_list_api_url = "https://api.github.com/repos/{repo_owner}/{repo_name}/pulls"\
-        .format(repo_owner=repo_owner, repo_name=repo_name)
+    pr_list_api_url = "https://api.github.com/repos/{repo_owner}/{repo_name}/pulls?access_token={OAUTH_TOKEN}"\
+        .format(repo_owner=repo_owner, repo_name=repo_name, OAUTH_TOKEN=OAUTH_TOKEN)
     pr_list = requests.get(pr_list_api_url).json()
     return pr_list
 
 def request_all_comments(repo_owner, repo_name):
     # instantiate db and table
     db_name = "pr_comments_db.sqlite"
-    dbw = DBWrapper(db_name)
     # FIX: long term solution to creating tables if they don't exist
     if not os.path.exists(db_name):
+        dbw = DBWrapper(db_name)
         print("Creating DB: {}".format(db_name))
         dbw.create_comments_table()
+    else:
+        dbw = DBWrapper(db_name)
 
     if ONLINE:
         pr_list = request_pr_list(repo_owner, repo_name)
