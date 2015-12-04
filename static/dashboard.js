@@ -7,9 +7,7 @@ $(document).ready(function() {
     ];
     repo_roster = [];
     for (var i=0, tot=repos_to_monitor.length; i < tot; i++) {
-        var endpoint = "/repo_roster/"+repos_to_monitor[i]["owner"]+"/"+repos_to_monitor[i]["repo"];
-        $.get(endpoint, function(data) {
-            debugger;
+        $.get("/repo_roster/"+repos_to_monitor[i]["owner"]+"/"+repos_to_monitor[i]["repo"], function(data) {
             repo_roster.push(data);
         });
     }

@@ -3,6 +3,7 @@ from flask import Flask
 app = Flask(__name__)
 from flask import request
 from flask import jsonify
+from flask import render_template
 
 # std imports
 from itertools import chain
@@ -67,6 +68,9 @@ def repo_roster(repo_owner, repo_name):
     wrapup = get_comments_wrapup_for_repo(dbw, repo_owner, repo_name)
     return jsonify(**wrapup)
 
+@app.route('/')
+def dashboard():
+    return render_template('dashboard.html')
     # error = None
     # if request.method == 'POST':
     #     if valid_login(request.form['username'],

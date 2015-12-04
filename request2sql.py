@@ -5,7 +5,7 @@ import json
 import os
 
 # Whether to make API calls, or read JSON from backup.  Good for solving Rate Limiting
-ONLINE = True
+ONLINE = False
 DUMP = False
 
 def extract_features_from_comment(comment):
@@ -66,6 +66,7 @@ def request_all_comments(repo_owner, repo_name):
     # instantiate db and table
     db_name = "pr_comments_db.sqlite"
     dbw = DBWrapper(db_name)
+    # FIX: long term solution to creating tables if they don't exist
     if not os.path.exists(db_name):
         print("Creating DB: {}".format(db_name))
         dbw.create_comments_table()
@@ -109,3 +110,5 @@ def request_all_comments(repo_owner, repo_name):
 
 if __name__ == '__main__':
     request_all_comments("mila-udem", "fuel")
+    request_all_comments("mila-udem", "blocks")
+    request_all_comments("mila-udem", "blocks-examples")
