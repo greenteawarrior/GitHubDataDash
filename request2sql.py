@@ -7,7 +7,7 @@ import os
 from config import OAUTH_TOKEN
 
 # Whether to make API calls, or read JSON from backup.  Good for solving Rate Limiting
-ONLINE = False
+ONLINE = True
 DUMP = False
 
 def extract_features_from_comment(comment):
