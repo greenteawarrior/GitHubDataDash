@@ -13,25 +13,30 @@ $(document).ready(function() {
             // this should be refactored at some point...
             if (repo_roster.length === 3) {
                 items = [];
+                comments_roster = {};
                 // thanks http://stackoverflow.com/questions/1208467/how-to-add-items-to-a-unordered-list-ul-using-jquery
                 $.each(repo_roster, function(i, repo) {
-                    var comments = "<ul class=comments-dropdown><li><a href=''>"
-                                   + repo["comments"].length
-                                   + " comments</a><ul>"
-                    // for loop here
-                    for (j=0; j < repo["comments"].length; j++) {
+                    // var comments = "<ul class=comments-dropdown><li><a href=''>"
+                    //                + repo["comments"].length
+                    //                + " comments</a><ul>"
+                    var comments = "";
+
+                    for (j=0; j < 6; j++) {
                         var current_comment = repo["comments"][j];
                         var current_comment_html = (
                              "<li class='hidden'>"
                            + "<a href='" + current_comment["url"] + "'>"
+                           + current_comment["person"]
+                           + ' : '
                            + current_comment["body"]
                            + "</a></li>"
                         )
-                        comments = comments + current_comment_html
+                        comments = comments + current_comment_html;
                     }
-                    comments = comments + "</ul></li></ul>"
+                    comments = comments + "</ul></li></ul>";
+                    comments_roster[repo["repo_name"]] = comments;
 
-                    items.push('<li>'
+                    items.push('<div>'
 
                                 // repo name with link
                                 + '<a href='
@@ -43,21 +48,38 @@ $(document).ready(function() {
                                 + repo["pull_requests"].length
                                 + ' PR ||  '
 
-                                + comments
                                 // # of comments
-                                // + repo["comments"].length
-                                // + ' comments'
+                                + '<span class=sidebar-comments id='
+                                + repo["repo_name"]
+                                + '-comments-sidebar>'
+                                + repo["comments"].length
+                                + ' comments'
+                                + '</span>'
 
-                                + '</li>');
+                                + '</div>');
                 });  // close each()
 
                 $('#repo-roster').append(items.join(''));
-                // $('.comments-dropdown').dropit();
+
+                $("#blocks-comments-sidebar").click(function() {
+                  $("#comments-content").hide();
+                  $("#comments-content").html(comments_roster["blocks"]);
+                  $("#comments-content").slideDown();
+                });
+
+                $("#fuel-comments-sidebar").click(function() {
+                  $("#comments-content").hide();
+                  $("#comments-content").html(comments_roster["fuel"]);
+                  $("#comments-content").slideDown();
+                });
+
+                $("#blocks-examples-comments-sidebar").click(function() {
+                  $("#comments-content").hide();
+                  $("#comments-content").html(comments_roster["blocks-examples"]);
+                  $("#comments-content").slideDown();
+                });
+
             }
         });
     }
-});
-
-$('.comments-dropdown').click(function(event) {
-    debugger;
 });

@@ -1,7 +1,21 @@
 #content {
   margin-left:  30%;
+  border: blue dashed;
 }
-#sidebar {
+#sidebar{
   float: left;
   width: 30%;
+  border: red dashed;
+}
+#container, #comments-content {
+  width: 75%;
+  margin: 0 auto;
+}
+
+/*borders for easy debugging!*/
+.sidebar-comments {
+  border: green dashed;
+}
+#repo-roster {
+  border: purple dashed;
 }
