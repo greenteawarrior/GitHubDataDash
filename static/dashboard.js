@@ -21,11 +21,13 @@ $(document).ready(function() {
                     // for loop here
                     for (j=0; j < repo["comments"].length; j++) {
                         var current_comment = repo["comments"][j];
-                        comments = comments
-                                   + "<li>"
-                                   + "<a href='" + current_comment["url"] + "'>"
-                                   + current_comment["body"]
-                                   + "</a></li>"
+                        var current_comment_html = (
+                             "<li class='hidden'>"
+                           + "<a href='" + current_comment["url"] + "'>"
+                           + current_comment["body"]
+                           + "</a></li>"
+                        )
+                        comments = comments + current_comment_html
                     }
                     comments = comments + "</ul></li></ul>"
 
@@ -42,7 +44,7 @@ $(document).ready(function() {
                                 + ' PR ||  '
 
                                 + comments
-                                // // # of comments
+                                // # of comments
                                 // + repo["comments"].length
                                 // + ' comments'
 
@@ -50,8 +52,12 @@ $(document).ready(function() {
                 });  // close each()
 
                 $('#repo-roster').append(items.join(''));
-                $('.comments-dropdown').dropit();
+                // $('.comments-dropdown').dropit();
             }
         });
     }
+});
+
+$('.comments-dropdown').click(function(event) {
+    debugger;
 });
