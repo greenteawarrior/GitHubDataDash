@@ -16,15 +16,12 @@ $(document).ready(function() {
                 comments_roster = {};
                 // thanks http://stackoverflow.com/questions/1208467/how-to-add-items-to-a-unordered-list-ul-using-jquery
                 $.each(repo_roster, function(i, repo) {
-                    // var comments = "<ul class=comments-dropdown><li><a href=''>"
-                    //                + repo["comments"].length
-                    //                + " comments</a><ul>"
-                    var comments = "";
+                    var comments ='<ul class="list-group">';
 
                     for (j=0; j < 6; j++) {
                         var current_comment = repo["comments"][j];
                         var current_comment_html = (
-                             "<li class='hidden'>"
+                             "<li class='hidden list-group-item'>"
                            + "<a href='" + current_comment["url"] + "'>"
                            + current_comment["person"]
                            + ' : '
@@ -36,27 +33,26 @@ $(document).ready(function() {
                     comments = comments + "</ul></li></ul>";
                     comments_roster[repo["repo_name"]] = comments;
 
-                    items.push('<div>'
+                    items.push('<li class="list-group-item"><div class="row">'
 
-                                // repo name with link
-                                + '<a href='
-                                + repo["repo_url"] + '>'
-                                + repo["repo_name"]
-                                + '</a> ||  '
+                                // repo_owner/repo_name (link to repo on GitHub)
+                                + '<div class="col-md-5">'
+                                + '<a href="">'
+                                + repo["repo_owner"] + '/' + repo["repo_name"]
+                                + '</a>'
+                                + '</div>'
 
-                                // # of pull requests
-                                + repo["pull_requests"].length
-                                + ' PR ||  '
+                                // X PRs
+                                + '<div class="col-md-3">'
+                                + repo["pull_requests"].length + ' PRs'
+                                + '</div>'
 
-                                // # of comments
-                                + '<span class=sidebar-comments id='
-                                + repo["repo_name"]
-                                + '-comments-sidebar>'
-                                + repo["comments"].length
-                                + ' comments'
-                                + '</span>'
+                                // X comments (button)
+                                + '<div class="col-md-4"><button class="btn btn-primary sidebar-comments" id="' + repo["repo_name"] + '-comments-sidebar"">'
+                                + repo["comments"].length + ' comments</button></div>'
+                                + '</div></li>');
 
-                                + '</div>');
+
                 });  // close each()
 
                 $('#repo-roster').append(items.join(''));
@@ -64,18 +60,22 @@ $(document).ready(function() {
                 $("#blocks-comments-sidebar").click(function() {
                   $("#comments-content").hide();
                   $("#comments-content").html(comments_roster["blocks"]);
+                  $('.hidden').toggleClass('hidden show');
                   $("#comments-content").slideDown();
                 });
+
 
                 $("#fuel-comments-sidebar").click(function() {
                   $("#comments-content").hide();
                   $("#comments-content").html(comments_roster["fuel"]);
+                  $('.hidden').toggleClass('hidden show');
                   $("#comments-content").slideDown();
                 });
 
                 $("#blocks-examples-comments-sidebar").click(function() {
                   $("#comments-content").hide();
                   $("#comments-content").html(comments_roster["blocks-examples"]);
+                  $('.hidden').toggleClass('hidden show');
                   $("#comments-content").slideDown();
                 });
 
