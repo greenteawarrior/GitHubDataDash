@@ -21,12 +21,15 @@ $(document).ready(function() {
                     for (j=0; j < repo["comments"].length ; j++) {
                         var current_comment = repo["comments"][j];
                         var current_comment_html = (
-                             "<li class='hidden list-group-item'>"
-                           + "<a href='" + current_comment["url"] + "'>"
-                           + current_comment["person"]
-                           + ' : '
-                           + markdown.toHTML(current_comment["body"])
-                           + "</a></li>"
+                             "<li class='hidden list-group-item col-xs-12'>"
+                            + '<div class="col-md-2"><img src="https://avatars0.githubusercontent.com/u/654434?v=3&s=90"><br>' + current_comment["person"] + '</div>'
+                            + '<div class="col-md-10">' + markdown.toHTML(current_comment["body"]) + '</div>'
+                            + '<a href="' + current_comment["url"] + '">'
+
+                            + '<div class="col-xs-12" style="padding: 0">'
+                            + '<div class="col-md-2"></div>'
+                            + '<div class="col-md-10" style="padding-right: 20"><button class="btn btn-primary">View comment + PR on GitHub</button></a></div>'
+                            + '</li>'
                         )
                         comments = comments + current_comment_html;
                     }

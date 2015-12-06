@@ -5,7 +5,7 @@
   float: left;
   width: 30%;
 }
-#container, #comments-content, #content-title {
+#container, #comments-content, #content-title, #test-row {
   width: 85%;
   margin: 0 auto;
 }
