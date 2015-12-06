@@ -18,7 +18,7 @@ $(document).ready(function() {
                 $.each(repo_roster, function(i, repo) {
                     var comments ='<ul class="list-group">';
 
-                    for (j=0; j < 6; j++) {
+                    for (j=0; j < repo["comments"].length ; j++) {
                         var current_comment = repo["comments"][j];
                         var current_comment_html = (
                              "<li class='hidden list-group-item'>"
