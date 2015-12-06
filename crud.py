@@ -18,17 +18,18 @@ class DBWrapper(object):
             repo_owner TEXT,
             repo_name TEXT,
             pr_number INT,
-            pr_updated_at TEXT
+            pr_updated_at TEXT,
+            avatar_url TEXT
             )"""
         )
         self.conn.commit()
 
-    def upsert_comment(self, link, person, time, body, repo_owner, repo_name, pr_number, pr_updated_at):
+    def upsert_comment(self, link, person, time, body, repo_owner, repo_name, pr_number, pr_updated_at, avatar_url):
         c = self.conn.cursor()
         c.execute("""INSERT OR IGNORE INTO comments
-            (link, person, time, body, repo_owner, repo_name, pr_number, pr_updated_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
-            (link, person, time, body, repo_owner, repo_name, pr_number, pr_updated_at))
+            (link, person, time, body, repo_owner, repo_name, pr_number, pr_updated_at, avatar_url)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+            (link, person, time, body, repo_owner, repo_name, pr_number, pr_updated_at, avatar_url))
         c.execute("""UPDATE comments SET
             link=?,
             person=?,
@@ -37,9 +38,10 @@ class DBWrapper(object):
             repo_owner=?,
             repo_name=?,
             pr_number=?,
-            pr_updated_at=?
+            pr_updated_at=?,
+            avatar_url=?
             WHERE link=? """,
-            (link, person, time, body, repo_owner, repo_name, pr_number, pr_updated_at, link))
+            (link, person, time, body, repo_owner, repo_name, pr_number, pr_updated_at, avatar_url, link))
         self.conn.commit()
 
     def get_comments_for_repo(self, repo_owner, repo_name):

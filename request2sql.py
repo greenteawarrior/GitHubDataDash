@@ -25,7 +25,8 @@ def extract_features_from_comment(comment):
         "person": comment["user"]["login"],
         "time" : comment["updated_at"],
         "body" : comment["body"],
-        "link" : comment["html_url"]
+        "link" : comment["html_url"],
+        "avatar_url": comment['user']['avatar_url']
     }
 
 def extract_features_from_pr(pr):
@@ -61,6 +62,7 @@ def request_pr_list(repo_owner, repo_name):
     """
     pr_list_api_url = "https://api.github.com/repos/{repo_owner}/{repo_name}/pulls?access_token={OAUTH_TOKEN}"\
         .format(repo_owner=repo_owner, repo_name=repo_name, OAUTH_TOKEN=OAUTH_TOKEN)
+    print pr_list_api_url
     pr_list = requests.get(pr_list_api_url).json()
     return pr_list
 
@@ -101,7 +103,6 @@ def request_all_comments(repo_owner, repo_name):
             with open('issue_comments%d.json' % i, 'r') as fp:
                 issue_comments = json.load(fp)
 
-
         for comment in review_comments:
             comment_schema = extract_features_from_comment(comment)
             comment_schema.update(pr_schema)
@@ -113,6 +114,6 @@ def request_all_comments(repo_owner, repo_name):
             dbw.upsert_comment(**comment_schema)
 
 if __name__ == '__main__':
-    request_all_comments("mila-udem", "fuel")
-    request_all_comments("mila-udem", "blocks")
-    request_all_comments("mila-udem", "blocks-examples")
+    request_all_comments("OlinMobileProto", "Lab1")
+    request_all_comments("OlinMobileProto", "Lab2")
+    request_all_comments("OlinMobileProto", "Lab3")
