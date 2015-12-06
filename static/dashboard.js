@@ -25,7 +25,7 @@ $(document).ready(function() {
                            + "<a href='" + current_comment["url"] + "'>"
                            + current_comment["person"]
                            + ' : '
-                           + current_comment["body"]
+                           + markdown.toHTML(current_comment["body"])
                            + "</a></li>"
                         )
                         comments = comments + current_comment_html;
