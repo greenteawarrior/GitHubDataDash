@@ -1,17 +1,20 @@
 $(document).ready(function() {
-
+    // mila-udem repos
+    // repos_to_monitor = [
+    //     {"owner": "mila-udem", "repo": "blocks"},
+    //     {"owner": "mila-udem", "repo": "fuel"},
+    //     {"owner": "mila-udem", "repo": "blocks-examples"}
+    // ];
     repos_to_monitor = [
-        {"owner": "mila-udem", "repo": "blocks"},
-        {"owner": "mila-udem", "repo": "fuel"},
-        {"owner": "mila-udem", "repo": "blocks-examples"}
+        {"owner": "OlinMobileProto", "repo": "Lab1"},
+        {"owner": "OlinMobileProto", "repo": "Lab2"}
     ];
     repo_roster = [];
     for (var i=0, tot=repos_to_monitor.length; i < tot; i++) {
         $.get("/repo_roster/"+repos_to_monitor[i]["owner"]+"/"+repos_to_monitor[i]["repo"], function(data) {
             repo_roster.push(data);
 
-            // this should be refactored at some point...
-            if (repo_roster.length === 3) {
+            if (repo_roster.length === repos_to_monitor.length) {
                 items = [];
                 comments_roster = {};
                 // thanks http://stackoverflow.com/questions/1208467/how-to-add-items-to-a-unordered-list-ul-using-jquery
@@ -22,7 +25,7 @@ $(document).ready(function() {
                         var current_comment = repo["comments"][j];
                         var current_comment_html = (
                              "<li class='hidden list-group-item col-xs-12'>"
-                            + '<div class="col-md-2"><img src="https://avatars0.githubusercontent.com/u/654434?v=3&s=90"><br>' + current_comment["person"] + '</div>'
+                            + '<div class="col-md-2"><img style="width:90px" src="' + current_comment['avatar_url'] + '&s=90' + '"><br>' + current_comment["person"] + '</div>'
                             + '<div class="col-md-10">' + markdown.toHTML(current_comment["body"]) + '</div>'
                             + '<a href="' + current_comment["url"] + '">'
 
@@ -60,27 +63,30 @@ $(document).ready(function() {
 
                 $('#repo-roster').append(items.join(''));
 
-                $("#blocks-comments-sidebar").click(function() {
-                  $("#comments-content").hide();
-                  $("#comments-content").html(comments_roster["blocks"]);
-                  $('.hidden').toggleClass('hidden show');
-                  $("#comments-content").slideDown();
-                });
+                for (var i = 0; i < repos_to_monitor.length; i++) {
+                    $("#"+repos_to_monitor[i]["repo"]+"-comments-sidebar").click(function(ev) {
+                      var repo_name = ev.currentTarget.id.split('-')[0]
+                      $("#comments-content").hide();
+                      $("#comments-content").html(comments_roster[repo_name]);
+                      $('.hidden').toggleClass('hidden show');
+                      $("#comments-content").slideDown();
+                    });
+                };
 
 
-                $("#fuel-comments-sidebar").click(function() {
-                  $("#comments-content").hide();
-                  $("#comments-content").html(comments_roster["fuel"]);
-                  $('.hidden').toggleClass('hidden show');
-                  $("#comments-content").slideDown();
-                });
+                // $("#fuel-comments-sidebar").click(function() {
+                //   $("#comments-content").hide();
+                //   $("#comments-content").html(comments_roster["fuel"]);
+                //   $('.hidden').toggleClass('hidden show');
+                //   $("#comments-content").slideDown();
+                // });
 
-                $("#blocks-examples-comments-sidebar").click(function() {
-                  $("#comments-content").hide();
-                  $("#comments-content").html(comments_roster["blocks-examples"]);
-                  $('.hidden').toggleClass('hidden show');
-                  $("#comments-content").slideDown();
-                });
+                // $("#blocks-examples-comments-sidebar").click(function() {
+                //   $("#comments-content").hide();
+                //   $("#comments-content").html(comments_roster["blocks-examples"]);
+                //   $('.hidden').toggleClass('hidden show');
+                //   $("#comments-content").slideDown();
+                // });
 
             }
         });

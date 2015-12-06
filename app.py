@@ -11,7 +11,7 @@ from itertools import chain
 # local imports
 from crud import DBWrapper
 
-SCHEMA = ["link", "person", "time", "body", "repo_owner", "repo_name", "pr_number", "pr_updated_at"]
+SCHEMA = ["link", "person", "time", "body", "repo_owner", "repo_name", "pr_number", "pr_updated_at", "avatar_url"]
 
 def construct_repo_url(repo_owner, repo_name):
     return "https://www.github.com/{repo_owner}/{repo_name}"\
@@ -47,7 +47,8 @@ def get_comments_wrapup_for_repo(dbw, repo_owner, repo_name):
                 "person": tmp["person"],
                 "body": tmp["body"],
                 "url": tmp["link"],
-                "time": tmp["time"]
+                "time": tmp["time"],
+                "avatar_url": tmp["avatar_url"]
             }
             wrapup["comments"].append(comment)
             pull_requests[tmp["pr_number"]] = construct_pull_request_url_v2(tmp['link'])

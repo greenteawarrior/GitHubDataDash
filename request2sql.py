@@ -114,6 +114,12 @@ def request_all_comments(repo_owner, repo_name):
             dbw.upsert_comment(**comment_schema)
 
 if __name__ == '__main__':
+    # Mobile Proto
     request_all_comments("OlinMobileProto", "Lab1")
     request_all_comments("OlinMobileProto", "Lab2")
     request_all_comments("OlinMobileProto", "Lab3")
+
+    # # mila-udem
+    # request_all_comments("mila-udem", "blocks")
+    # request_all_comments("mila-udem", "Lab2")
+    # request_all_comments("mila-udem", "Lab3")
