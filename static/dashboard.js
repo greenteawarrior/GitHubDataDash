@@ -43,7 +43,7 @@ $(document).ready(function() {
 
                                 // repo_owner/repo_name (link to repo on GitHub)
                                 + '<div class="col-md-5">'
-                                + '<a href="">'
+                                + '<a href="' + repo["repo_url"] + '">'
                                 + repo["repo_owner"] + '/' + repo["repo_name"]
                                 + '</a>'
                                 + '</div>'
@@ -58,7 +58,6 @@ $(document).ready(function() {
                                 + repo["comments"].length + ' comments</button></div>'
                                 + '</div></li>');
 
-
                 });  // close each()
 
                 $('#repo-roster').append(items.join(''));
@@ -72,21 +71,6 @@ $(document).ready(function() {
                       $("#comments-content").slideDown();
                     });
                 };
-
-
-                // $("#fuel-comments-sidebar").click(function() {
-                //   $("#comments-content").hide();
-                //   $("#comments-content").html(comments_roster["fuel"]);
-                //   $('.hidden').toggleClass('hidden show');
-                //   $("#comments-content").slideDown();
-                // });
-
-                // $("#blocks-examples-comments-sidebar").click(function() {
-                //   $("#comments-content").hide();
-                //   $("#comments-content").html(comments_roster["blocks-examples"]);
-                //   $('.hidden').toggleClass('hidden show');
-                //   $("#comments-content").slideDown();
-                // });
 
             }
         });

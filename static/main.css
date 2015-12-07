@@ -1,9 +1,9 @@
 #content {
-  margin-left:  30%;
+  margin-left:  35%;
 }
 #sidebar{
   float: left;
-  width: 30%;
+  width: 35%;
 }
 #container, #comments-content, #content-title, #test-row {
   width: 85%;

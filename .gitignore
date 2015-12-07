@@ -1,3 +1,5 @@
 *.pyc
 *.sqlite
 config.py
+clipboard.js
+
