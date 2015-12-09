@@ -65,6 +65,7 @@ $(document).ready(function() {
                 for (var i = 0; i < repos_to_monitor.length; i++) {
                     $("#"+repos_to_monitor[i]["repo"]+"-comments-sidebar").click(function(ev) {
                       var repo_name = ev.currentTarget.id.split('-')[0]
+                      $("#content-title").html(repo_name + " comments")
                       $("#comments-content").hide();
                       $("#comments-content").html(comments_roster[repo_name]);
                       $('.hidden').toggleClass('hidden show');
