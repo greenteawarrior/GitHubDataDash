@@ -1,0 +1,11 @@
+#content {
+  margin-left:  35%;
+}
+#sidebar{
+  float: left;
+  width: 35%;
+}
+#container, #comments-content, #content-title, #test-row {
+  width: 85%;
+  margin: 0 auto;
+}

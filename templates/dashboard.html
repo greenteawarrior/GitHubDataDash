@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <title>GitHubDataDash</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="{{ url_for('static', filename='dropit/dropit.js') }}"></script>
+        <script src="{{ url_for('static', filename='lib/markdown.min.js') }}"></script>
+        <link rel="stylesheet" href="{{ url_for('static', filename='dropit/dropit.css') }}" type="text/css" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" type="text/css" />
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    </head>
+
+  <body>
+    <div id="container">
+    <div class="page-header">
+      <h3>GitHubDataDash!! <small>A data dashboard by <a href="https://github.com/greenteawarrior">@greenteawarrior</a> and <a href="https://github.com/youralien">@youralien</a> || Final project for Data Dashboard Design @ Olin College (Fall 2015) <a href="https://github.com/greenteawarrior/GitHubDataDash"> + Code on GitHub</a></small></h3>
+    </div>
+      <div id="sidebar">
+        <div id="repo-roster">
+          <h3>Repos</h3>
+          <ul class="list-group">
+          </ul>
+        </div>
+          <div id="ninja-roster">
+            <br>
+            <h3>NINJA Feedback Progress for <br>Assigned Repos</h3>
+
+            sihrc (Chris Lee)
+            <div class="progress">
+              <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 25%">
+                2/8 Repos
+              </div>
+            </div>
+
+            runnersaw (Sawyer Vaughan)
+            <div class="progress">
+              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 62.5%">
+                5/8 Repos
+              </div>
+            </div>
+
+            hhansson (Hayley Hansson)
+            <div class="progress">
+              <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                8/8 Repos
+              </div>
+            </div>
+
+          </div>
+      </div>
+
+      <div id="content">
+        <br>
+        <h3 id="content-title">PR Comments</h3>
+          <div id="comments-content">
+            <ul class="list-group">
+            </ul>
+          </div>
+      </div>
+
+    </div>
+  </body>
+
+  <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+</html>

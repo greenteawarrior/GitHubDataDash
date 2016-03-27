@@ -4,6 +4,8 @@ import requests
 import json
 import os
 
+from config import OAUTH_TOKEN
+
 # Whether to make API calls, or read JSON from backup.  Good for solving Rate Limiting
 ONLINE = True
 DUMP = False
@@ -23,7 +25,8 @@ def extract_features_from_comment(comment):
         "person": comment["user"]["login"],
         "time" : comment["updated_at"],
         "body" : comment["body"],
-        "link" : comment["html_url"]
+        "link" : comment["html_url"],
+        "avatar_url": comment['user']['avatar_url']
     }
 
 def extract_features_from_pr(pr):
@@ -57,18 +60,22 @@ def request_pr_list(repo_owner, repo_name):
     -------
     pr_list: list of json objects
     """
-    pr_list_api_url = "https://api.github.com/repos/{repo_owner}/{repo_name}/pulls"\
-        .format(repo_owner=repo_owner, repo_name=repo_name)
+    pr_list_api_url = "https://api.github.com/repos/{repo_owner}/{repo_name}/pulls?access_token={OAUTH_TOKEN}"\
+        .format(repo_owner=repo_owner, repo_name=repo_name, OAUTH_TOKEN=OAUTH_TOKEN)
+    print pr_list_api_url
     pr_list = requests.get(pr_list_api_url).json()
     return pr_list
 
 def request_all_comments(repo_owner, repo_name):
     # instantiate db and table
     db_name = "pr_comments_db.sqlite"
-    dbw = DBWrapper(db_name)
+    # FIX: long term solution to creating tables if they don't exist
     if not os.path.exists(db_name):
+        dbw = DBWrapper(db_name)
         print("Creating DB: {}".format(db_name))
         dbw.create_comments_table()
+    else:
+        dbw = DBWrapper(db_name)
 
     if ONLINE:
         pr_list = request_pr_list(repo_owner, repo_name)
@@ -96,7 +103,6 @@ def request_all_comments(repo_owner, repo_name):
             with open('issue_comments%d.json' % i, 'r') as fp:
                 issue_comments = json.load(fp)
 
-
         for comment in review_comments:
             comment_schema = extract_features_from_comment(comment)
             comment_schema.update(pr_schema)
@@ -108,4 +114,12 @@ def request_all_comments(repo_owner, repo_name):
             dbw.upsert_comment(**comment_schema)
 
 if __name__ == '__main__':
-    request_all_comments("mila-udem", "fuel")
+    # Mobile Proto
+    request_all_comments("OlinMobileProto", "Lab1")
+    request_all_comments("OlinMobileProto", "Lab2")
+    request_all_comments("OlinMobileProto", "Lab3")
+
+    # # mila-udem
+    # request_all_comments("mila-udem", "blocks")
+    # request_all_comments("mila-udem", "Lab2")
+    # request_all_comments("mila-udem", "Lab3")
