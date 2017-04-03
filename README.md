@@ -1,5 +1,5 @@
 # GitHubDataDash
-a dashboard to understand Github activity @ Olin College
+a dashboard to understand GitHub activity @ Olin College
 
 To open/view the current data dashboard prototype:
 * Start a terminal window and navigate to this repo on your local machine
